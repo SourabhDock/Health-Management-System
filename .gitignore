@@ -1,0 +1,15 @@
+# IDE files
+.idea/
+*.iml
+
+# Environment and credentials
+.env
+node_modules/       # (If using Node.js/Express)
+venv/               # (If using Python)
+target/             # (If using Java/Maven)
+dist/
+build/
+
+# Logs
+logs/
+*.log
