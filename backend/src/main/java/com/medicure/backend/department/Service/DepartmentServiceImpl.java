@@ -4,7 +4,6 @@ import com.medicure.backend.department.Entity.department;
 import com.medicure.backend.department.Repository.DepartmentRepository;
 import com.medicure.backend.department.dto.Response.DepartmentResponse;
 import com.medicure.backend.doctor.Entity.doctor;
-import com.medicure.backend.doctor.Service.DoctorService;
 import com.medicure.backend.doctor.dto.Response.DoctorResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

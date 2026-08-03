@@ -31,3 +31,15 @@ public class CreateAppointmentRequest {
     @NotBlank(message = "Reason is required")
     private String reason;
 }
+
+/*
+
+{
+
+"PatientId": 1l,
+"doctorId": 2l,
+"departmentId":1l,
+"AppointmentDateTime": yyyy-mm-dd hh:mm:ss
+}
+
+ */

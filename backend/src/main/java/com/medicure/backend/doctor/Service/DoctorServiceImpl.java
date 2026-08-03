@@ -1,10 +1,14 @@
 package com.medicure.backend.doctor.Service;
 
+import com.medicure.backend.common.exception.DuplicateResourceException;
+import com.medicure.backend.common.exception.GlobalExceptionHandler;
+import com.medicure.backend.common.exception.ResourceNotFoundException;
 import com.medicure.backend.department.Entity.department;
 import com.medicure.backend.department.Repository.DepartmentRepository;
 import com.medicure.backend.doctor.Entity.doctor;
 import com.medicure.backend.doctor.Repository. DoctorRepository;
 import com.medicure.backend.doctor.dto.Request.CreateDoctorRequest ;
+import com.medicure.backend.doctor.dto.Request.UpdateDoctorResquest;
 import com.medicure.backend.doctor.dto.Response.DoctorResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,8 +29,8 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public doctor createDoctor(CreateDoctorRequest doctorRequest) {
-        if (doctorRequest == null) {
-            throw new RuntimeException("No new object created");
+        if (doctorRepository.existsByEmail(doctorRequest.getEmail()) || doctorRepository.existsByPhone(doctorRequest.getPhone())) {
+            throw new DuplicateResourceException("Doctor email already exists: " + doctorRequest.getEmail() + " or Doctor email already exists: " + doctorRequest.getPhone());
         }
 
         doctor doctor = new doctor();
@@ -37,12 +41,13 @@ public class DoctorServiceImpl implements DoctorService {
         doctor.setConsultation_fee(doctorRequest.getConsultation_fee());
         doctor.setSpecialization(doctorRequest.getSpecialization());
         doctor.setQualification(doctorRequest.getQualification());
-        doctor.setStatus("ACTIVE");
+        doctor.setStatus(doctor.getStatus());
+
 
         // Validate and attach existing Department entity from DB
         if (doctorRequest.getDepartment() != null && doctorRequest.getDepartment().getDepartmentId() != null) {
             department dept = departmentRepository.findById(doctorRequest.getDepartment().getDepartmentId())
-                    .orElseThrow(() -> new RuntimeException("Department not found with ID: "
+                    .orElseThrow(() -> new ResourceNotFoundException("Department not found with DeptID :- "
                             + doctorRequest.getDepartment().getDepartmentId()));
             doctor.setDepartment(dept);
         }
@@ -54,14 +59,14 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public DoctorResponse getDoctorById(Long doctorId) {
         doctor doctor = doctorRepository.findById(doctorId)
-                .orElseThrow(() -> new RuntimeException("Doctor not found with ID: " + doctorId));
+                .orElseThrow(() -> new ResourceNotFoundException("Doctor Not found in system with Doctor ID :- " + doctorId));
         return mapToResponse(doctor);
     }
 
     @Override
-    public DoctorResponse updateDoctor(Long doctorId, CreateDoctorRequest doctorRequest) {
+    public DoctorResponse updateDoctor(Long doctorId, UpdateDoctorResquest doctorRequest) {
         doctor existingDoctor = doctorRepository.findById(doctorId)
-                .orElseThrow(() -> new RuntimeException("Doctor not found with ID: " + doctorId));
+                .orElseThrow(() -> new  ResourceNotFoundException("Doctor Not found in system with Doctor ID :- "+ doctorId));
 
         existingDoctor.setDoctor_name(doctorRequest.getDoctor_name());
         existingDoctor.setGender(doctorRequest.getGender());
@@ -70,13 +75,9 @@ public class DoctorServiceImpl implements DoctorService {
         existingDoctor.setConsultation_fee(doctorRequest.getConsultation_fee());
         existingDoctor.setQualification(doctorRequest.getQualification());
         existingDoctor.setSpecialization(doctorRequest.getSpecialization());
+        existingDoctor.setSpecialization(doctorRequest.getSpecialization());
+        existingDoctor.setStatus(doctorRequest.getStatus());
 
-        if (doctorRequest.getDepartment() != null && doctorRequest.getDepartment().getDepartmentId() != null) {
-            department dept = departmentRepository.findById(doctorRequest.getDepartment().getDepartmentId())
-                    .orElseThrow(() -> new RuntimeException("Department not found with ID: "
-                            + doctorRequest.getDepartment().getDepartmentId()));
-            existingDoctor.setDepartment(dept);
-        }
 
         doctor updatedDoctor = doctorRepository.save(existingDoctor);
         return mapToResponse(updatedDoctor);
@@ -84,11 +85,13 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public boolean deleteDoctor(Long doctorId) {
-        if (doctorRepository.existsById(doctorId)) {
+
+        if(doctorRepository.existsById(doctorId)){
             doctorRepository.deleteById(doctorId);
             return true;
         }
-        return false;
+        throw new ResourceNotFoundException("Doctor Not found in system with Doctor ID :- " + doctorId);
+
     }
 
     @Override
@@ -122,8 +125,8 @@ public class DoctorServiceImpl implements DoctorService {
         response.setEmail(doctor.getEmail());
         response.setConsultation_fee(doctor.getConsultation_fee());
         response.setStatus(doctor.getStatus());
-        response.setJoined_date(doctor.getJoined_date());
-        response.setUser_id(doctor.getUser_id());
+
+
 
         if (doctor.getDepartment() != null) {
             response.setDepartmentId(doctor.getDepartment().getDepartmentId());

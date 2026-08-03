@@ -41,3 +41,14 @@ public class department {
 
 }
 
+/*
+
+{
+"department_name":" ",
+"description": " ",
+"status": " ",
+"doctor_list":" ",
+
+}
+ */
+

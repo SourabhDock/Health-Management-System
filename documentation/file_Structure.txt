@@ -1,0 +1,102 @@
+com.medicore.backend
+│
+├── auth
+│   ├── controller
+│   ├── service
+│   ├── repository
+│   ├── entity
+│   ├── dto
+│   ├── security
+│   └── jwt
+│
+├── patient
+│   ├── controller
+│   ├── service
+│   ├── repository
+│   ├── entity
+│   ├── dto
+│   └── mapper
+│
+├── doctor
+│   ├── controller
+│   ├── service
+│   ├── repository
+│   ├── entity
+│   ├── dto
+│   └── mapper
+│
+├── department
+│   ├── controller
+│   ├── service
+│   ├── repository
+│   ├── entity
+│   └── dto
+│
+├── receptionist
+│
+├── appointment
+│
+├── common
+│   ├── entity
+│   ├── enums
+│   ├── exception
+│   ├── response
+│   ├── util
+│   └── validation
+│
+└── config
+
+entity as
+doctor/
+    entity/
+        Doctor.java
+
+
+Service
+doctor
+│
+├── service
+│     ├── DoctorService.java
+│     └── impl
+│           └── DoctorServiceImpl.java
+
+
+DTO
+dto
+│
+├── request
+│     ├── CreateDoctorRequest
+│     ├── UpdateDoctorRequest
+│
+└── response
+      ├── DoctorResponse
+
+
+
+Common package
+common
+│
+├── entity
+│      BaseEntity
+│
+├── enums
+│      Gender
+│      Role
+│      Status
+│      AppointmentStatus
+│
+├── exception
+│
+├── response
+│      ApiResponse
+│
+├── util
+│
+└── validation
+
+
+Auth
+auth
+│
+├── entity
+│      User

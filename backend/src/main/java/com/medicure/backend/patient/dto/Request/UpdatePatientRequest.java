@@ -7,3 +7,20 @@ public class UpdatePatientRequest {
     private String phone;
     private String email;
 }
+
+
+/*
+
+{
+"first_name":" ",
+"last_name":" ",
+"dob":" ",
+"phone":" ",
+"email":" ",
+"address":" ",
+"emergency_contact":" ",
+"status":" "
+}
+
+
+ */

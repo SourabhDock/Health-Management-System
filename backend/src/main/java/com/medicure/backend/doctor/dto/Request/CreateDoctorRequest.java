@@ -28,7 +28,26 @@ public class CreateDoctorRequest {
     private double consultation_fee;
     private String specialization;
     private String qualification;
+    private int experience_year;
+}
+
+/*
+
+{
+
+"doctor_name":" ",
+"gender":" ",
+"phone":" ",
+"email":" ",
+"specialization":" ",
+"qualification":" ",
+"experience_year":" ",
+"consultation_fee":" ",
+"status":" ",
+
 
 
 
 }
+
+ */

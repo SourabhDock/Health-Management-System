@@ -10,4 +10,6 @@ import  java.util.List;
 public interface DoctorRepository extends JpaRepository<doctor, Long> {
 
 
+    public boolean existsByEmail(String email);
+    public boolean existsByPhone(String phone);
 }

@@ -26,3 +26,19 @@ public class CreatePatientRequest {
     )
     public String phone;
 }
+
+/*
+{
+"first_name":" ",
+"last_name":" ",
+"gender":" ",
+"dob":" ",
+"blood_group":" ",
+"phone":" ",
+"email":" ",
+"address":" ",
+"emergency_contact":" ",
+"status":" "
+ }
+
+ */

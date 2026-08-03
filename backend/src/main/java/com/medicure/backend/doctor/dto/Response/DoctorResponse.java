@@ -1,7 +1,11 @@
 package com.medicure.backend.doctor.dto.Response;
 
+import com.medicure.backend.common.enums.Status;
 import lombok.Data;
-import java.time.LocalDate;
+import org.hibernate.annotations.UpdateTimestamp;
+
+
+import java.time.LocalDateTime;
 
 @Data
 public class DoctorResponse {
@@ -14,9 +18,7 @@ public class DoctorResponse {
     private String phone;
     private String email;
     private double consultation_fee;
-    private String status;
-    private LocalDate joined_date;
-    private int user_id;
+    private Status status;
     private Long departmentId;
     private String departmentName;
 }

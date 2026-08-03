@@ -23,3 +23,15 @@ public class UpdateAppointmentRequest {
 
     private APPOINTMENT_STATUS status;
 }
+
+/*
+
+{
+
+"PatientId": 1l,
+"doctorId": 2l,
+"departmentId":1l,
+"AppointmentDateTime": yyyy-mm-dd hh:mm:ss
+}
+
+ */

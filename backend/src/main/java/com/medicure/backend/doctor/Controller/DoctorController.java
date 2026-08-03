@@ -3,6 +3,7 @@ package com.medicure.backend.doctor.Controller;
 import com.medicure.backend.doctor.Entity.doctor;
 import com.medicure.backend.doctor.Service.DoctorService;
 import com.medicure.backend.doctor.dto.Request.CreateDoctorRequest;
+import com.medicure.backend.doctor.dto.Request.UpdateDoctorResquest;
 import com.medicure.backend.doctor.dto.Response.DoctorResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -59,7 +60,7 @@ public class DoctorController {
     }
 
     @PutMapping("/id/{id}")
-    public ResponseEntity<DoctorResponse> updateDoctor(@PathVariable Long id, @RequestBody CreateDoctorRequest doctorRequest  ){
+    public ResponseEntity<DoctorResponse> updateDoctor(@PathVariable Long id, @RequestBody UpdateDoctorResquest doctorRequest  ){
        return new ResponseEntity<>( doctorService.updateDoctor(id, doctorRequest),HttpStatus.OK);
     }
 
